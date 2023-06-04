@@ -13,10 +13,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the Scrapy project directory to the container
 COPY . .
 
-# # Run the tests
-# RUN python -m unittest discover tests/
+# Set default environment variables
+ENV DEBUG_CMD="exec /bin/bash -c 'trap : TERM INT; sleep infinity & wait'"
+ENV PRODUCTION_CMD="bash -c 'scrapy crawl myspider && tail -f /dev/null'"
+ENV TEST_CMD="python -m unittest discover tests/"
 
-# # Set the default command to run the Scrapy spider
-# CMD ["scrapy", "crawl", "myspider"]
-
-CMD exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"
+# Set the default command based on the provided environment variable
+CMD ${DEFAULT_CMD}

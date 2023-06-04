@@ -1,9 +1,4 @@
 
-# Job Street web scraper using scrapy library.
-
-
-
-
 ## Run Locally
 
 Clone the project
@@ -24,9 +19,20 @@ Build docker image
   docker build -t job_street_scrapy . 
 ```
 
-Start the server
+Run docker in production mode. 
 
 ```bash
-  docker run -d job_street_scrapy
+  docker run -e DEFAULT_CMD="${PRODUCTION_CMD}" <image-name>
 ```
 
+Run docker in debug mode. 
+
+```bash
+  docker run -e DEFAULT_CMD="${DEBUG_CMD}" <image-name>
+```
+
+Run docker unit tests. 
+
+```bash
+  docker run -e DEFAULT_CMD="${TEST_CMD}" <image-name>
+```
